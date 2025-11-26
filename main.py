@@ -7,12 +7,10 @@ class XDifferentialAttention(nn.Module):
         self.W_q = nn.ParameterList(
             [nn.Parameter(torch.empty(embedding_size, head_dim)) for _ in range(self.num_heads)])
         self.W_o = nn.Parameter(torch.empty(self.num_heads * self.head_dim, embedding_size))
-        for W in self.W_q:
-            nn.init.xavier_uniform_(W)
-        for W in self.W_k:
-            nn.init.xavier_uniform_(W)
-        for W in self.W_v:
-            nn.init.xavier_uniform_(W)
+        for i in range(self.num_heads):
+            nn.init.xavier_uniform(self.W_k[i])
+            nn.init.xaiver_uniform(self.W_v[i])
+            nn.init.xaiver_uniform(self.W_q[i])
         nn.init.xavier_uniform_(self.W_o)
         self.head_dim = head_dim
         self.prediction_layer = nn.Linear(self.num_heads * self.head_dim, vocab_size)
