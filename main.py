@@ -1,5 +1,5 @@
 class XDifferentialAttention(nn.Module):
-    def __init__(self, q, k, v, embedding_size, num_heads, head_dim, vocab_size):
+    def __init__(self, q, k, v, embedding_size=512, num_heads=16, head_dim=64, vocab_size=5000):
         super().__init__()
         self.num_heads = num_heads
         self.W_k = nn.ParameterList([nn.Parameter(torch.empty(embedding_size, head_dim * 2)) for _ in range(self.num_heads)])
