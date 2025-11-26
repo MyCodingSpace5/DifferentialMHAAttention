@@ -48,4 +48,5 @@ class XDifferentialAttention(nn.Module):
     def forward(self, x):
         x = self.mha(x)
         x = self.prediction_layer(x)
+        self.lambd = torch.exp(self.lambd1 * self.lambd2) - torch.exp(self.lambd3 * self.lambd4) + self.lambd_init
         return x
